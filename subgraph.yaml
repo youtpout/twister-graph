@@ -1,0 +1,26 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Twister
+    network: scroll-sepolia
+    source:
+      address: "0xda8c05c7f2783b0a8c1410636d379d0cd7cbd644"
+      abi: Twister
+      startBlock: 2991194
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AddLeaf
+      abis:
+        - name: Twister
+          file: ./abis/Twister.json
+      eventHandlers:
+        - event: AddLeaf(indexed address,indexed bytes32,indexed uint32,bool,uint256)
+          handler: handleAddLeaf
+      file: ./src/twister.ts
